@@ -10,7 +10,7 @@ The recommended directory structure is:
 ```text
 here/
 ├── thenhere/                  # Cloned Keras repository
-│   ├── keras/
+│   ├── keras
 │   ├── ...
 │   └── homatect.ipynb
 │

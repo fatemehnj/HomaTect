@@ -22,3 +22,8 @@ HomaDebugger, which uses HomaTect as its diagnostic core, loads the implementati
 ```python
 %run thenhere/homatect
 ```
+
+## Dependencies
+
+HomaTect requires a local clone of the Keras source repository. It directly imports Keras modules, including internal modules under keras.src. Therefore, the Keras source version must match the version against which HomaTect was developed and tested.
+The implementation was tested with Python 3.11.9, Keras 3.3.3, and TensorFlow 2.16.1.

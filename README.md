@@ -20,7 +20,7 @@ here/
 HomaDebugger, which uses HomaTect as its diagnostic core, loads the implementation using the following IPython command:
 
 ```python
-%run thenhere/homatect
+%run thenhere/homatect.ipynb
 ```
 
 ## Dependencies

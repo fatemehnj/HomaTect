@@ -1,6 +1,6 @@
 ## Using HomaTect
 
-HomaTect analyzes a Keras model to identify potential configuration and architectural faults and provides diagnostic messages with actionable recommendations. It can be used with a model that has been constructed but not compiled or trained. Calling `model.compile()` or `model.fit()` is **not a prerequisite** for model diagnosis. When these operations have not been performed, HomaTect skips the corresponding checks that depend on compilation or training information.
+HomaTect analyzes a Keras model to identify potential configuration and architectural faults and provides diagnostic messages with actionable recommendations. It can be used with a model that has been constructed but not compiled or trained. Calling `model.compile()` or `model.fit()` is not a prerequisite for model diagnosis. When these operations have not been performed, HomaTect skips the corresponding checks that depend on compilation or training information.
 
 ### Example: Multiclass Classification with a 1D CNN
 
@@ -19,10 +19,12 @@ model = Sequential()
 model.add(Conv1D(64, 3, activation='relu', input_shape=(72, 1)))
 model.add(MaxPooling1D(2))
 model.add(Conv1D(64, 3))
+# + model.add(Conv1D(64, 3), activation='relu')
 model.add(MaxPooling1D(2))
 # + model.add(Flatten())
 model.add(Dense(64, activation='relu'))
 model.add(Dense(1, activation='sigmoid'))
+# + model.add(Dense(28, activation='softmax'))
 
 # Compile the model (optional for HomaTect diagnosis)
 model.compile(Adam(0.0001), loss='categorical_crossentropy', metrics=['accuracy'])
@@ -106,9 +108,9 @@ For the example above, HomaTect reports the following findings:
 Layer3: layer needs a non linear activation function.you can use relu.
 For a multiclass classification model with 28 classes encoded as classnumbers: 
 Layer 6: Activation function in the output layer is sigmoid while softmax is required
-Compile parameter: Loss function is categorical_crossentropy while sparse_categorical_crossentropy is required
 Layer6: For a multiclass classification model, with 28 classes, you need 28 output nodes, while there are 1 nodes
 Layer5: The Dense layer receives a multi-dimensional feature map without a preceding Flatten layer. If the Dense layer is intended to operate on the complete feature vector, a Flatten layer should be added before it.
+Compile parameter: Loss function is categorical_crossentropy while sparse_categorical_crossentropy is required
 ```
 These messages identify potential problems and provide recommendations for addressing them. HomaTect reports diagnostic findings, it does not automatically modify or repair the model.
 

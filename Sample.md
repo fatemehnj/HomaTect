@@ -92,8 +92,6 @@ Specifies the input dimensions of the model, excluding the batch dimension and t
 
 For example, for a 1D CNN whose Keras input shape is `(72, 1)`, the corresponding HomaTect argument is `(72,)`. Similarly, for a 2D CNN with a Keras input shape of `(32, 32, 3)`, the HomaTect argument is `(32, 32)`.
 
-The batch dimension is also excluded. Therefore, the HomaTect argument represents the input dimensions without either the batch or channel dimension.
-
 **4. `output_shape`**
 
 Specifies the number of output classes for classification tasks or the target shape for regression tasks.
@@ -105,12 +103,14 @@ For example, a multiclass classification model with 28 output classes uses `outp
 For the example above, HomaTect reports the following findings:
 
 ```text
-Layer3: layer needs a non linear activation function.you can use relu.
+Layer3: layer needs a non linear activation function. You can use relu.
+
 For a multiclass classification model with 28 classes encoded as classnumbers: 
 Layer 6: Activation function in the output layer is sigmoid while softmax is required
 Layer6: For a multiclass classification model, with 28 classes, you need 28 output nodes, while there are 1 nodes
-Layer5: The Dense layer receives a multi-dimensional feature map without a preceding Flatten layer. If the Dense layer is intended to operate on the complete feature vector, a Flatten layer should be added before it.
 Compile parameter: Loss function is categorical_crossentropy while sparse_categorical_crossentropy is required
+
+Layer5: The Dense layer receives a multi-dimensional feature map without a preceding Flatten layer. If the Dense layer is intended to operate on the complete feature vector, a Flatten layer should be added before it.
 ```
 These messages identify potential problems and provide recommendations for addressing them. HomaTect reports diagnostic findings, it does not automatically modify or repair the model.
 
